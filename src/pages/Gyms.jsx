@@ -77,7 +77,7 @@ const Gyms = () => {
           <div className={styles.grid}>
             {info
               .filter((item) => {
-                if (find == "") {
+                if (find === "") {
                   return item;
                 } else if (
                   item.gym_name.toLowerCase().includes(find.toLowerCase())
