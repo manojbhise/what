@@ -16,6 +16,8 @@ import { useState } from "react";
 const Gyms = () => {
   const [find, setFind] = useState("");
   const [info, setInfo] = useState([]);
+  const [city, setCity] = useState("");
+  const [location, setLocation] = useState("");
 
   useEffect(() => {
     axios
@@ -26,6 +28,7 @@ const Gyms = () => {
       .catch((e) => console.log(e));
   }, []);
   console.log("in", info);
+  console.log("c",city);
 
   return (
     <div className={styles.main}>
@@ -57,7 +60,7 @@ const Gyms = () => {
             <h3>Location</h3>
             <div>
               <BiSearch style={{ fontSize: "20px", color: "#707070" }} />
-              <input type="text" placeholder="Enter Location" />
+              <input type="text" onChange={(e)=>setLocation(e.target.value)} placeholder="Enter Location" />
             </div>
             <h3>Price</h3>
             <div>
@@ -65,11 +68,11 @@ const Gyms = () => {
               <input type="text" placeholder="Max" />
             </div>
             <h3>Cities</h3>
-            <select name="" id="">
+            <select name="" id="" onChange={(e)=>setCity(e.target.value)}>
               <option value="">Select By</option>
               <option value="new_delhi">New Delhi</option>
               <option value="ghaziabad">Ghaziabad</option>
-              <option value="greater_noida">Greater Noida</option>
+              <option value="greater">Greater Noida</option>
               <option value="noida">Noida</option>
               <option value="delhi">Delhi</option>
             </select>
@@ -81,6 +84,24 @@ const Gyms = () => {
                   return item;
                 } else if (
                   item.gym_name.toLowerCase().includes(find.toLowerCase())
+                ) {
+                  return item;
+                }
+              })
+              .filter((item) => {
+                if (city === "") {
+                  return item;
+                } else if (
+                  item.city.toLowerCase().includes(city.toLowerCase())
+                ) {
+                  return item;
+                }
+              })
+              .filter((item) => {
+                if (location === "") {
+                  return item;
+                } else if (
+                  item.address1.toLowerCase().includes(location.toLowerCase())
                 ) {
                   return item;
                 }
