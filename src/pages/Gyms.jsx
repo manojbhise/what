@@ -10,20 +10,22 @@ import { RiHandSanitizerFill } from "react-icons/ri";
 import { TiTick } from "react-icons/ti";
 import { FcBusinessman } from "react-icons/fc";
 import { useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
 import { useState } from "react";
 
 const Gyms = () => {
   const [find, setFind] = useState("");
   const [info, setInfo] = useState([]);
-  
-  useEffect(()=>{
-    axios.get("https://devapi.wtfup.me/gym/nearestgym?lat=30.325488815850512&long=78.0042384802231")
-    .then(res=>setInfo(res.data.data))
-    .catch((e)=>console.log(e));
 
-  },[]);
-    console.log("in",info);
+  useEffect(() => {
+    axios
+      .get(
+        "https://devapi.wtfup.me/gym/nearestgym?lat=30.325488815850512&long=78.0042384802231"
+      )
+      .then((res) => setInfo(res.data.data))
+      .catch((e) => console.log(e));
+  }, []);
+  console.log("in", info);
 
   return (
     <div className={styles.main}>
@@ -39,11 +41,15 @@ const Gyms = () => {
               color: "rgb(173, 172, 172)",
             }}
           />
-          <input type="text" onChange={(e)=>setFind(e.target.value)} placeholder="Search gym name here..." />
+          <input
+            type="text"
+            onChange={(e) => setFind(e.target.value)}
+            placeholder="Search gym name here..."
+          />
           <button>
             <FaMapMarkerAlt />
           </button>
-          <button onClick={()=>setFind("")}>Clear</button>
+          <button onClick={() => setFind("")}>Clear</button>
         </div>
         <div className={styles.gyms}>
           <div className={styles.filter}>
@@ -69,58 +75,48 @@ const Gyms = () => {
             </select>
           </div>
           <div className={styles.grid}>
-            {info.map((item)=>{
-              return (
-                <div key={item.user_id}>
-                <div className={styles.gridL}></div>
-                <div className={styles.gridR}>
-                  <h3>{item.gym_name}</h3>
-                  <div>
-                    <AiFillStar />
-                    <AiFillStar />
-                    <AiFillStar />
-                    <AiFillStar />
-                    <AiFillStar />
+            {info
+              .filter((item) => {
+                if (find == "") {
+                  return item;
+                } else if (
+                  item.gym_name.toLowerCase().includes(find.toLowerCase())
+                ) {
+                  return item;
+                }
+              })
+              .map((item) => {
+                return (
+                  <div key={item.user_id}>
+                    <div className={styles.gridL}></div>
+                    <div className={styles.gridR}>
+                      <h3>{item.gym_name}</h3>
+                      <div>
+                        <AiFillStar />
+                        <AiFillStar />
+                        <AiFillStar />
+                        <AiFillStar />
+                        <AiFillStar />
+                      </div>
+                      <p>
+                        {item.address2}, {item.address1}, {item.city},{" "}
+                        {item.state}
+                      </p>
+                      <p>
+                        <GrWaypoint
+                          style={{ color: "green", backgroundColor: "green" }}
+                        />{" "}
+                        {Math.round(item.duration) / 100} minutes away |{" "}
+                        {Math.round(item.distance) / 100}km
+                      </p>
+                      <div>
+                        <p></p>
+                        <button>Book Now</button>
+                      </div>
+                    </div>
                   </div>
-                  <p>{item.address2}, {item.address1}, {item.city}, {item.state}</p>
-                  <p>
-                    <GrWaypoint
-                      style={{ color: "green", backgroundColor: "green" }}
-                    />{" "}
-                    {Math.round(item.duration)/100} minutes away | {Math.round(item.distance)/100}km
-                  </p>
-                  <div>
-                    <p></p>
-                    <button>Book Now</button>
-                  </div>
-                </div>
-              </div>
-              )
-            })}
-            {/* <div>
-              <div className={styles.gridL}></div>
-              <div className={styles.gridR}>
-                <h3>WTF: Hybrid Gym</h3>
-                <div>
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                </div>
-                <p>A 452 Basement, New Ashok Nagar</p>
-                <p>
-                  <GrWaypoint
-                    style={{ color: "green", backgroundColor: "green" }}
-                  />{" "}
-                  3.18 minutes away | 2.12km
-                </p>
-                <div>
-                  <p>&#8377; 3600 for 3 Months</p>
-                  <button>Book Now</button>
-                </div>
-              </div>
-            </div> */}
+                );
+              })}
           </div>
         </div>
       </div>
@@ -133,23 +129,33 @@ const Gyms = () => {
         <div className={styles.regular}>
           <div className={styles.regularL}>
             <p></p>
-            <p>@ your regular <br /> gym cost</p>
+            <p>
+              @ your regular <br /> gym cost
+            </p>
           </div>
           <div className={styles.regularR}>
             <div>
-              <GiSteeringWheel style={{fontSize:"45px",margin:"0",marginTop:"10px"}}/>
+              <GiSteeringWheel
+                style={{ fontSize: "45px", margin: "0", marginTop: "10px" }}
+              />
               <p>Modern Equipments</p>
             </div>
             <div>
-              <FcBusinessman style={{fontSize:"45px",margin:"0",marginTop:"10px"}}/>
+              <FcBusinessman
+                style={{ fontSize: "45px", margin: "0", marginTop: "10px" }}
+              />
               <p>Skilled Trainer</p>
             </div>
             <div>
-              <TiTick style={{fontSize:"45px",margin:"0",marginTop:"10px"}}/>
+              <TiTick
+                style={{ fontSize: "45px", margin: "0", marginTop: "10px" }}
+              />
               <p>Top class Ambience</p>
             </div>
             <div>
-              <RiHandSanitizerFill style={{fontSize:"45px",margin:"0",marginTop:"10px"}}/>
+              <RiHandSanitizerFill
+                style={{ fontSize: "45px", margin: "0", marginTop: "10px" }}
+              />
               <p>Sanitized GYMS</p>
             </div>
           </div>
