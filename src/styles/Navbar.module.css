@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+.main {
+  height: 70px;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: transparent;
+}
+.nav {
+  height: 100%;
+  width: 84%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav > .left {
+  height: 60%;
+  width: 88px;
+}
+.nav > .left > img {
+  height: 100%;
+  width: 100%;
+}
+.nav > .right {
+  width: 69%;
+  height: 70%;
+}
+.nav > .right > ul {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav > .right > ul > li {
+  height: 100%;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.nav > .right > ul > li > a {
+  color: rgb(173, 172, 172);
+  font-size: 19px;
+  font-weight: 100;
+  text-decoration: none;
+}
+.nav > .right > ul > li > button {
+  padding: 8px 13px;
+  border: none;
+  border-radius: 5px;
+  font-size: 17px;
+  font-weight: normal;
+  color: rgb(173, 172, 172);
+  background-color: rgb(255, 3, 3);
+  cursor: pointer;
+}
+.nav > .right > ul > li > a:hover {
+    color: white;
+}
