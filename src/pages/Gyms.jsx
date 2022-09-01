@@ -9,6 +9,7 @@ import { GiSteeringWheel } from "react-icons/gi";
 import { RiHandSanitizerFill } from "react-icons/ri";
 import { TiTick } from "react-icons/ti";
 import { FcBusinessman } from "react-icons/fc";
+import { BsWhatsapp } from "react-icons/bs";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
@@ -32,6 +33,9 @@ const Gyms = () => {
 
   return (
     <div className={styles.main}>
+      <div className={styles.whatsapp}>
+        <BsWhatsapp style={{fontSize: "28px", color:"green"}}/>
+      </div>
       <div className={styles.bcg}>
         <img src={bcg_img} alt="bcg_img" />
       </div>

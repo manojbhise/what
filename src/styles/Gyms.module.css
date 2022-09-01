@@ -10,6 +10,20 @@ body{
 .main{
     width: 100%;
 }
+.whatsapp{
+    position: fixed;
+    top: 83vh;
+    right: 3vh;
+    z-index: 100;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    cursor: pointer;
+}
 .bcg{
     width: 100vw;
     height: 95vh;
